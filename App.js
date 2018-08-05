@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Routes from './src/components/Routes';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux';
 
 export default class App extends Component {
   render() {
     return (
-      <Routes />
+      <Provider store={createStore(reducers)} >
+        <Routes />
+      </Provider>
     );
   }
 }
