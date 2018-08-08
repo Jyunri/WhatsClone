@@ -1,17 +1,18 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Button} from 'react-native';
-import { Actions } from 'react-native-router-flux'
+import React from 'react';
+import { StyleSheet, View, TextInput, Button } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
-export default props =>(
+const formCadastro = props => (
   <View style={styles.mainContainer}>
     <View style={styles.signupContainer}>
-      <TextInput style={{ fontSize: 20, height: 45 }} placeholder='Nome' />
-      <TextInput style={{ fontSize: 20, height: 45 }} placeholder='Email' />
-      <TextInput style={{ fontSize: 20, height: 45 }} placeholder='senha' />
+      <TextInput value={props.nome} style={{ fontSize: 20, height: 45 }} placeholder='Nome' />
+      <TextInput value={props.email} style={{ fontSize: 20, height: 45 }} placeholder='Email' />
+      <TextInput value={props.senha} style={{ fontSize: 20, height: 45 }} placeholder='senha' />
     </View>
     <View style={styles.accessContainer}>
       <View backgroundColor='green'>
-        <Button color='green' title='Cadastrar' onPress={ () => Actions.signIn() } />
+        <Button color='white' title='Cadastrar' onPress={ () => Actions.signIn() } />
       </View>
     </View>
   </View>
@@ -30,3 +31,13 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
+
+const mapStateToProps = state => (
+	{
+    nome: state.AutenticacaoReducer.nome,
+		email: state.AutenticacaoReducer.email,
+		senha: state.AutenticacaoReducer.senha
+	}
+);
+
+export default connect(mapStateToProps, null)(formCadastro);
