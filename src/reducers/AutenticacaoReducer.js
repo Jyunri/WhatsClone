@@ -1,10 +1,13 @@
 const INITIAL_STATE = {
-  nome: 'bla',
-  email: 'bla',
-  senha: 'bla'
+  nome: '',
+  email: '',
+  senha: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
+  if (action.type == 'modifica_nome') {
+    return { ...state, nome: action.payload };
+  }
   if (action.type == 'modifica_email') {
     return { ...state, email: action.payload };
   }
