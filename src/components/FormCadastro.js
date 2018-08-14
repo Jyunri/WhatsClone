@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button, ImageBackground } from 'react-native';
+import { StyleSheet, View, TextInput, Button, ImageBackground, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
@@ -43,6 +43,8 @@ class FormCadastro extends Component {
               placeholder='senha'
               placeholderTextColor='white'
             />
+
+            <Text style={{ color: 'red', fontSize: 18 }}>{this.props.erroCadastro}</Text>
           </View>
           <View style={styles.accessContainer}>
             <View backgroundColor='green'>
@@ -73,7 +75,8 @@ const mapStateToProps = state => (
 	{
     nome: state.AutenticacaoReducer.nome,
 		email: state.AutenticacaoReducer.email,
-		senha: state.AutenticacaoReducer.senha
+    senha: state.AutenticacaoReducer.senha,
+    erroCadastro: state.AutenticacaoReducer.erroCadastro
 	}
 );
 
