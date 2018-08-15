@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, Button, TouchableHighlight, ImageBackground } from 'react-native';
+import {StyleSheet, Text, View, TextInput, Button, TouchableHighlight, ImageBackground, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { modificaEmail, modificaSenha, autenticarUsuario } from '../actions/AutenticacaoAction';
@@ -11,6 +11,17 @@ class formLogin extends Component {
 	_autenticarUsuario() {
 		const { email, senha } = this.props;
 		this.props.autenticarUsuario({ email, senha });
+	}
+
+	renderBtnAcessar() {
+		if(this.props.loadingLogin) {
+			return (
+				<ActivityIndicator size='large' />
+			);
+		}
+		return (
+			<Button color='white' title='Acessar' onPress={() => this._autenticarUsuario() } />
+		);
 	}
 
 	render() {
@@ -36,13 +47,14 @@ class formLogin extends Component {
 							onChangeText={texto => this.props.modificaSenha(texto)}
 							placeholderTextColor='white'
 						/>
+						<Text style={{ color: 'red', fontSize: 18 }}>{this.props.erroLogin}</Text>
 						<TouchableHighlight onPress={() => Actions.signUp()} >
 							<Text style={{ fontSize: 20, marginTop: 30, color: 'lightgray' }}>Ainda nao tem cadastro? Cadastre-se</Text>
 						</TouchableHighlight>
 					</View>
 					<View style={styles.accessContainer}>
 						<View backgroundColor='green'>
-							<Button color='white' title='Acessar' onPress={() => this._autenticarUsuario() } />
+							{ this.renderBtnAcessar() }
 						</View>
 					</View>
 				</View>
@@ -69,7 +81,9 @@ const mapStateToProps = state => {
 	return (
 		{
 			email: state.AutenticacaoReducer.email,
-			senha: state.AutenticacaoReducer.senha
+			senha: state.AutenticacaoReducer.senha,
+			erroLogin: state.AutenticacaoReducer.erroLogin,
+			loadingLogin: state.AutenticacaoReducer.loadingLogin,
 		}
 	);
 };

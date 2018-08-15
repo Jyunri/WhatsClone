@@ -7,13 +7,15 @@ import { Router, Scene } from 'react-native-router-flux';
 import FormLogin from './FormLogin';
 import FormCadastro from './FormCadastro';
 import BoasVindas from './BoasVindas';
+import Principal from './Principal';
 
 export default props => (
-  <Router>
+  <Router navigationBarStyle={{ backgroundColor: '#115E54' }} titleStyle={{ color: 'white' }} >
     <Scene key='root'>
-      <Scene key='signIn' component={FormLogin} title="Login" initial />
-      <Scene key='signUp' component={FormCadastro} title="Cadastro"/>
-      <Scene key='welcome' component={BoasVindas} title="Boas Vindas" />
+      <Scene key='signIn' component={FormLogin} title="Login" hideNavBar />
+      <Scene key='signUp' component={FormCadastro} title="Cadastro" hideNavBar={ false } />
+      <Scene key='welcome' component={BoasVindas} title="Boas Vindas" hideNavBar />
+      <Scene key='principal' component={Principal} title="Principal" hideNavBar />
     </Scene>
   </Router>
 );

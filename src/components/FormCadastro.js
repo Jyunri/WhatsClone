@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button, ImageBackground, Text } from 'react-native';
+import { StyleSheet, View, TextInput, Button, ImageBackground, Text, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
@@ -14,6 +14,19 @@ class FormCadastro extends Component {
     const params = { nome: this.props.nome, email: this.props.email, senha: this.props.senha }
 
     this.props.cadastraUsuario(params);
+  }
+
+  renderBtnCadastro() {
+    if (this.props.loading_cadastro) {
+      return (
+        <ActivityIndicator size="large" />
+      );
+    }
+    return (
+      <View backgroundColor='green'>
+        <Button color='white' title='Cadastrar' onPress={ () => this._cadastraUsuario() } />
+      </View>
+    );
   }
 
   render() {
@@ -47,9 +60,7 @@ class FormCadastro extends Component {
             <Text style={{ color: 'red', fontSize: 18 }}>{this.props.erroCadastro}</Text>
           </View>
           <View style={styles.accessContainer}>
-            <View backgroundColor='green'>
-              <Button color='white' title='Cadastrar' onPress={ () => this._cadastraUsuario() } />
-            </View>
+            { this.renderBtnCadastro() }
           </View>
         </View>
       </ImageBackground>
@@ -76,7 +87,8 @@ const mapStateToProps = state => (
     nome: state.AutenticacaoReducer.nome,
 		email: state.AutenticacaoReducer.email,
     senha: state.AutenticacaoReducer.senha,
-    erroCadastro: state.AutenticacaoReducer.erroCadastro
+    erroCadastro: state.AutenticacaoReducer.erroCadastro,
+    loading_cadastro: state.AutenticacaoReducer.loading_cadastro
 	}
 );
 
