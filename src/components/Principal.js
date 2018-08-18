@@ -1,10 +1,39 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import * as React from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import TabBarMenu from './TabBarMenu';
+import Conversas from './Conversas';
+import Contatos from './Contatos';
 
-const Principal = props => (
-  <View style={{ marginTop: 100 }}>
-    <Text>Pagina principal da aplicacao</Text>
-  </View>
-);
+export default class TabViewExample extends React.Component {
+  state = {
+    index: 0,
+    routes: [
+      { key: 'first', title: 'Conversas' },
+      { key: 'second', title: 'Contatos' },
+    ],
+  };
 
-export default  Principal;
+  _renderTabBar= props => <TabBarMenu {...props} />;
+
+  render() {
+    return (
+      <TabView
+        navigationState={this.state}
+        renderScene={SceneMap({
+          first: Conversas,
+          second: Contatos,
+        })}
+        onIndexChange={index => this.setState({ index })}
+        initialLayout={{ width: Dimensions.get('window').width }}
+        renderTabBar={this._renderTabBar }
+      />
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+});
