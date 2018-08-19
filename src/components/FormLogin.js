@@ -38,6 +38,7 @@ class formLogin extends Component {
 							placeholder='email'
 							onChangeText={texto => this.props.modificaEmail(texto)}
 							placeholderTextColor='white'
+							autoCapitalize = 'none'
 						/>
 						<TextInput
 							secureTextEntry

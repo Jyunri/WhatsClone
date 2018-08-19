@@ -2,8 +2,11 @@ import * as React from 'react';
 import { View, Text, StatusBar, Image, TouchableHighlight } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
 import { Actions } from '../../node_modules/react-native-router-flux';
+import { connect } from 'react-redux';
+import { habilitaInclusaoContato } from '../actions/AppActions'
 
-export default props => ( 
+
+const TabBarMenu = props => ( 
   <View style={{ backgroundColor: '#115E54', justifyContent: 'center', elevation: 4, marginBottom: 6 }}>
     <StatusBar hidden />
 
@@ -15,7 +18,7 @@ export default props => (
       <View style={{ flexDirection: 'row', marginRight: 20 }} >
         <View style={{ justifyContent: 'center', width: 50, alignItems: 'center' }}>
           <TouchableHighlight
-            onPress={() => Actions.adicionarContato()}
+            onPress={() => { Actions.adicionarContato(); props.habilitaInclusaoContato() }}
             underlayColor='#114D44'
           >
             <Image source={require('../imgs/adicionar_contato.png')} />
@@ -30,3 +33,5 @@ export default props => (
     <TabBar {...props} style={{ backgroundColor: '#115E54' }} indicatorStyle={{ backgroundColor: 'white' }} />
   </View>
 );
+
+export default connect(null, { habilitaInclusaoContato })(TabBarMenu);
