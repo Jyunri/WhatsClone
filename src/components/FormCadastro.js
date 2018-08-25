@@ -47,6 +47,7 @@ class FormCadastro extends Component {
               onChangeText={texto => this.props.modificaEmail(texto)}
               placeholder='email'
               placeholderTextColor='white'
+              autoCapitalize='none'
             />
             <TextInput
               secureTextEntry

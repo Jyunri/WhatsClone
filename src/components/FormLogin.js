@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-	console.log(state);
 	return (
 		{
 			email: state.AutenticacaoReducer.email,
