@@ -9,6 +9,7 @@ import FormCadastro from './FormCadastro';
 import BoasVindas from './BoasVindas';
 import Principal from './Principal';
 import AdicionarContato from './AdicionarContato';
+import Conversa from './Conversa';
 
 export default props => (
   <Router navigationBarStyle={{ backgroundColor: '#115E54' }} titleStyle={{ color: 'white' }} >
@@ -18,6 +19,7 @@ export default props => (
       <Scene key='welcome' component={BoasVindas} title="Boas Vindas" hideNavBar />
       <Scene key='principal' component={Principal} title="Principal" hideNavBar />
       <Scene key='adicionarContato' component={AdicionarContato} title="Adicionar Contato" hideNavBar={ false } />
+      <Scene key='conversa' component={Conversa} title="Conversa" hideNavBar={ false } />
     </Scene>
   </Router>
 );
